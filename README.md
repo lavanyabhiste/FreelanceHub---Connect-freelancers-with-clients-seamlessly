@@ -283,8 +283,8 @@ Seeded on boot (ADMIN_EMAIL / ADMIN_PASSWORD)
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/<your-username>/FreelanceHub.git
-cd FreelanceHub
+git clone https://github.com/lavanyabhiste/FreelanceHub---Connect-freelancers-with-clients-seamlessly.git
+cd FreelanceHub---Connect-freelancers-with-clients-seamlessly
 
 # 2. Install backend dependencies
 cd Server
@@ -403,7 +403,7 @@ node e2e-ui-apis-test.js    # 14 checks: public feed + client aggregate APIs
 | | |
 |---|---|
 | 🌐 **Live Demo** | `https://<your-deployment>.onrender.com` *(add your Vercel/Netlify/Render link)* |
-| 📦 **GitHub** | `https://github.com/<your-username>/FreelanceHub` |
+| 📦 **GitHub** | https://github.com/lavanyabhiste/FreelanceHub---Connect-freelancers-with-clients-seamlessly |
 | 🎥 **Video walkthrough** | `https://youtu.be/<video-id>` *(optional)* |
 
 ## 🔮 Future Enhancements

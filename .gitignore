@@ -1,0 +1,25 @@
+# ── Dependencies ──────────────────────────────────────────────
+node_modules/
+
+# ── Environment secrets — NEVER commit ────────────────────────
+.env
+.env.local
+.env.*.local
+
+# ── Build output ──────────────────────────────────────────────
+Client/dist/
+dist/
+.vite/
+
+# ── Runtime artifacts (chat uploads) ──────────────────────────
+Server/uploads/
+
+# ── Logs ──────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+
+# ── Editor / OS metadata ──────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

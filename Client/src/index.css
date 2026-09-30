@@ -1,0 +1,488 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #4f46e5;
+  --primary-hover: #4338ca;
+  --secondary-color: #0f172a;
+  --accent-color: #06b6d4;
+  --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+  --card-bg: #ffffff;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --border-color: #e2e8f0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-icon-box {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%) !important;
+}
+
+.feature-card {
+  transition: all 0.25s ease-in-out;
+  border: 1px solid rgba(226, 232, 240, 0.8) !important;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -10px rgba(79, 70, 229, 0.15) !important;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   APP SHELL — responsive sidebar layout (Client / Freelancer / Admin)
+   Desktop (≥992px): sticky sidebar. Mobile: offcanvas + backdrop.
+   ══════════════════════════════════════════════════════════════════════════ */
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.app-sidebar {
+  position: sticky;
+  top: 0;
+  width: 256px;
+  min-width: 256px;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  z-index: 1045;
+  transition: transform 0.28s ease;
+}
+
+.app-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+.app-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+}
+
+.app-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f1f5f9;
+}
+
+.app-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1030;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1rem;
+  background: #ffffff;
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
+}
+
+.app-sidebar-backdrop {
+  display: none;
+}
+
+.sidebar-link {
+  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+.sidebar-link:hover {
+  transform: translateX(3px);
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #fff !important;
+}
+/* Inactive nav items on the dark sidebar — high-contrast by default */
+.sidebar-link-quiet {
+  color: rgba(226, 232, 240, 0.78);
+}
+.sidebar-link-quiet:hover {
+  color: #ffffff !important;
+}
+
+.hamburger-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--text-primary);
+  font-size: 1.15rem;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+.hamburger-btn:hover {
+  background: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+}
+
+@media (max-width: 991.98px) {
+  .app-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100dvh;
+    transform: translateX(-100%);
+    box-shadow: 8px 0 30px rgba(15, 23, 42, 0.25);
+  }
+  .app-sidebar.open {
+    transform: translateX(0);
+  }
+  .app-sidebar-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(2px);
+    z-index: 1040;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  .app-sidebar-backdrop.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+@media (min-width: 992px) {
+  .app-mobile-topbar {
+    display: none !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   UI KIT — cards, section titles, search, chips, states
+   ══════════════════════════════════════════════════════════════════════════ */
+.fh-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 18px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 8px 24px -16px rgba(15, 23, 42, 0.12);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.fh-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 34px -18px rgba(79, 70, 229, 0.35);
+}
+
+.fh-section-title {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.fh-gradient-text {
+  background: linear-gradient(120deg, #4f46e5 0%, #06b6d4 55%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.fh-search {
+  border: 1.5px solid var(--border-color);
+  border-radius: 14px;
+  padding: 0.65rem 1rem 0.65rem 2.5rem;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2394a3b8' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0'/%3E%3C/svg%3E") no-repeat 0.85rem center;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  width: 100%;
+}
+.fh-search:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.12);
+}
+
+.fh-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: #eef2ff;
+  color: var(--primary-color);
+  border: 1px solid #e0e7ff;
+}
+
+.fh-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: var(--text-secondary);
+}
+.fh-state .fh-state-icon {
+  font-size: 2.6rem;
+  margin-bottom: 0.6rem;
+  filter: grayscale(0.15);
+}
+.fh-state-title {
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.25rem;
+}
+
+/* SpotlightCard restyled for light theme (ReactBits) */
+.fh-feature-spotlight {
+  background-color: #ffffff !important;
+  border: 1px solid rgba(226, 232, 240, 0.9) !important;
+  color: var(--text-primary);
+  border-radius: 18px !important;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 8px 24px -16px rgba(15, 23, 42, 0.12);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+.fh-feature-spotlight:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px -20px rgba(79, 70, 229, 0.45);
+}
+
+/* Stat card (dashboards) */.fh-stat {
+  border-radius: 18px;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  background: #fff;
+  padding: 1.1rem 1.2rem;
+  height: 100%;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  position: relative;
+  overflow: hidden;
+}
+.fh-stat:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 34px -20px rgba(79, 70, 229, 0.4);
+}
+.fh-stat::after {
+  content: '';
+  position: absolute;
+  inset: auto -30% -60% auto;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(79, 70, 229, 0.1), transparent 70%);
+  pointer-events: none;
+}
+.fh-stat-value {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+/* ═══ Hero (Home) — fresh layered gradient background ═══ */
+.fh-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 4.75rem 0 6.5rem;
+  background:
+    radial-gradient(ellipse 70% 55% at 18% 8%, rgba(99, 102, 241, 0.5), transparent 62%),
+    radial-gradient(ellipse 65% 50% at 85% 22%, rgba(6, 182, 212, 0.38), transparent 58%),
+    radial-gradient(ellipse 85% 60% at 55% 118%, rgba(139, 92, 246, 0.45), transparent 62%),
+    linear-gradient(165deg, #0b1120 0%, #131a3d 52%, #1e1b4b 100%);
+}
+@media (max-width: 575.98px) {
+  .fh-hero {
+    padding: 3.25rem 0 4.75rem;
+  }
+}
+
+/* Subtle engineering-grid overlay, faded toward the edges */
+.fh-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 46px 46px;
+  -webkit-mask-image: radial-gradient(ellipse 90% 85% at 50% 40%, #000 25%, transparent 78%);
+  mask-image: radial-gradient(ellipse 90% 85% at 50% 40%, #000 25%, transparent 78%);
+  pointer-events: none;
+}
+
+.fh-hero-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 1;
+  animation: fh-float 9s ease-in-out infinite;
+}
+@keyframes fh-float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-22px) scale(1.06); }
+}
+
+/* Hero headline — bright gradient on dark, layout-safe against SplitText's
+   inline styles (display/overflow/white-space) so letters never collapse,
+   clip, or stack. */
+.fh-hero-title {
+  display: block !important;
+  width: 100% !important;
+  overflow: visible !important;
+  white-space: normal !important;
+  word-wrap: normal !important;
+  text-align: center !important;
+  font-size: clamp(2.5rem, 8vw, 4.75rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+  line-height: 1.06 !important;
+  margin: 0 0 0.35rem !important;
+  color: #f8fafc;
+  background: linear-gradient(95deg, #f8fafc 0%, #67e8f9 38%, #a5b4fc 72%, #f0abfc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 6px 26px rgba(103, 232, 249, 0.22));
+}
+
+/* Gradient accent bar under headings */
+.fh-title-accent {
+  width: 92px;
+  height: 5px;
+  margin: 0.65rem auto 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #6366f1, #06b6d4, #a855f7);
+}
+
+/* Pulsing live dot for the hero badge */
+.fh-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #34d399;
+  animation: fh-pulse 2.2s ease-out infinite;
+}
+@keyframes fh-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.55); }
+  70% { box-shadow: 0 0 0 9px rgba(52, 211, 153, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); }
+}
+
+/* Gradient icon tiles for feature cards */
+.fh-icon-tile {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  box-shadow: 0 10px 22px -12px rgba(79, 70, 229, 0.55);
+}
+
+/* Closing CTA panel — deep space navy with violet bloom */
+.fh-cta-panel {
+  background:
+    radial-gradient(ellipse 60% 80% at 85% 15%, rgba(6, 182, 212, 0.28), transparent 60%),
+    radial-gradient(ellipse 55% 70% at 10% 90%, rgba(139, 92, 246, 0.32), transparent 60%),
+    linear-gradient(120deg, #0b1120 0%, #131a3d 55%, #1e1b4b 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 24px 60px -30px rgba(15, 23, 42, 0.6);
+}
+.fh-cta-panel h4 {
+  background: linear-gradient(95deg, #ffffff 20%, #67e8f9 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Glass CTA buttons — guaranteed visible text over dark surfaces.
+   Targets .inner-content (which uses inline styles) via !important. */
+.star-border-container.fh-btn-glass .inner-content {
+  background: rgba(11, 17, 32, 0.55) !important;
+  color: #e2e8f0 !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  backdrop-filter: blur(6px);
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.star-border-container.fh-btn-glass:hover .inner-content {
+  background: rgba(11, 17, 32, 0.82) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Public navbar — deep gradient matching the hero */
+.public-navbar {
+  background: linear-gradient(90deg, #0b1120 0%, #131a3d 55%, #1e1b4b 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Public navbar */
+.public-nav-link {
+  color: rgba(255, 255, 255, 0.78);
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 0.4rem 0.2rem;
+  text-decoration: none;
+  position: relative;
+  transition: color 0.18s ease;
+}
+.public-nav-link:hover,
+.public-nav-link.active {
+  color: #fff;
+}
+.public-nav-link.active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2.5px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #4f46e5, #06b6d4);
+}
+
+/* Tables inside cards — friendlier on small screens */
+@media (max-width: 575.98px) {
+  .table th, .table td {
+    white-space: nowrap;
+  }
+  .container-fluid.px-4 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
